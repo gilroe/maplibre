@@ -37,16 +37,29 @@
       });
     });
 
-    function onEachBuilding(e) {
-      const building = e.features[0].properties;
+    
+function onEachBuilding(e) {
+  const building = e.features[0].properties;
 
-      if (building.NAME) {
-        const popup = new maplibregl.Popup()
-          .setLngLat(e.lngLat)
-          .setText(building.NAME)
-          .addTo(map);
-      }
-    }
+  const buildingName =
+    building.NAME;
+ 
+
+  const neighbourhood =
+    building.NEIGHBOURHOOD;
+   
+
+  if (buildingName) {
+    const popupText = neighbourhood
+      ? `${buildingName} (${neighbourhood})`
+      : buildingName;
+
+    const popup = new maplibregl.Popup()
+      .setLngLat(e.lngLat)
+      .setText(String(popupText))
+      .addTo(map);
+  }
+}
   </script>
 </body>
 </html>
