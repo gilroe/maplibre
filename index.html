@@ -3,33 +3,50 @@
 <head>
   <meta charset="utf-8">
   <title>My map</title>
+
   <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
-  <style> body { margin: 0; } #map { position: absolute; inset: 0; } </style>
+
+  <style>
+    body { margin: 0; }
+    #map { position: absolute; inset: 0; }
+  </style>
 </head>
 <body>
   <div id="map"></div>
+
   <script>
     const map = new maplibregl.Map({
       container: 'map',
-      style: 'basic.json',        // the file you downloaded from Maputnik
-      center: [-123.25, 49.26],    // longitude, latitude
+      style: 'basic.json',
+      center: [-123.25, 49.26],
       zoom: 11
     });
+
     map.addControl(new maplibregl.NavigationControl());
-    
-    map.on('click', 'ubc', onEachBuilding);
 
-function onEachBuilding(e) {
-  const building = e.features[0].properties;
+    map.on('load', () => {
+      map.on('click', 'ubc', onEachBuilding);
 
-  if (building.name) {
-    const popup = new maplibregl.Popup();
-    popup.setLngLat(e.lngLat);
-    popup.setText(building.name);
-    popup.addTo(map);
-  }
-}
+      map.on('mouseenter', 'ubc', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.on('mouseleave', 'ubc', () => {
+        map.getCanvas().style.cursor = '';
+      });
+    });
+
+    function onEachBuilding(e) {
+      const building = e.features[0].properties;
+
+      if (building.name) {
+        const popup = new maplibregl.Popup()
+          .setLngLat(e.lngLat)
+          .setText(building.name)
+          .addTo(map);
+      }
+    }
   </script>
 </body>
 </html>
