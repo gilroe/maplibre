@@ -17,6 +17,19 @@
       zoom: 11
     });
     map.addControl(new maplibregl.NavigationControl());
+    
+    map.on('click', 'ubc', onEachBuilding);
+
+function onEachBuilding(e) {
+  const building = e.features[0].properties;
+
+  if (building.name) {
+    const popup = new maplibregl.Popup();
+    popup.setLngLat(e.lngLat);
+    popup.setText(building.name);
+    popup.addTo(map);
+  }
+}
   </script>
 </body>
 </html>
