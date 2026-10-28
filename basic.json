@@ -813,12 +813,27 @@
         "text-halo-width": 2
       }
     },
-    {
-      "id": "ubc",
-      "type": "circle",
-      "source": "ubc",
-      "paint": {"circle-opacity": 0.8, "circle-color": "rgba(18, 94, 235, 1)"}
-    }
+  {
+  "id": "ubc",
+  "type": "circle",
+  "source": "ubc",
+  "paint": {
+    "circle-radius": 6,
+    "circle-opacity": 0.9,
+    "circle-color": [
+      "match",
+      ["get", "NEIGHBOURHOOD"],
+      "Wesbrook", "#e76f51",
+      "Academic", "#2a9d8f",
+      "Chancellor", "#e9c46a",
+      "Hawthorn", "#6c63ff",
+      "Hampton", "#ff6300",
+      "EastCampus", "#ff7200",
+      "UBlvd", "#006300",
+      "#999999"
+    ]
+  }
+}
   ],
   "id": "basic"
 }
