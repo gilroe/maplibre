@@ -40,10 +40,10 @@
     function onEachBuilding(e) {
       const building = e.features[0].properties;
 
-      if (building.name) {
+      if (building.NAME) {
         const popup = new maplibregl.Popup()
           .setLngLat(e.lngLat)
-          .setText(building.name)
+          .setText(building.NAME)
           .addTo(map);
       }
     }
